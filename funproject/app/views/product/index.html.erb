@@ -1,0 +1,22 @@
+<h2>List Of Products</h2><b class="message"> <%= flash[:message] %></b><b class="error"> <%= flash[:error] %></b>
+<br><br>
+<table class="table">
+    <thead >
+        <tr >
+            <th scope="col" style="border-top-style:none;">Product</th>
+            <th scope="col"style="border-top-style:none;"> </th>
+            <th scope="col" style="border-top-style:none;"> </th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @data.each do |value| %>
+            <tr >
+                <td scope="row"><h5 class><%= value[:name] %></h5></td>
+                <td><a href="/product/detail/<%= value[:id] %>"><button type="button" class="btn btn-primary">Show</button></a></td>
+                <td><a href="/product/delete/<%= value[:id] %>"><button type="button" class="btn btn-danger" onClick="return confirm('Are You Sure To Delete This Product ?')">Remove</button></a></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<br>
+<h4>Click Here To <a href="/">Add New Products</a></h4>

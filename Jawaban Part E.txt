@@ -1,0 +1,15 @@
+1. (4C1 / 12C1) x (3C1 / 11C1) x (4C1 / 10C1) = (4 / 12) x (3 / 11) x (4 / 10) = 48 / 1320 = 2 / 55
+Asumsi yang digunakan adalah kelereng yang diambil tidak ada pengembalian dan yang diambil total 3 kelereng
+(4C1 / 12C1) Adalah Perhitungan Untuk Kelereng Merah Pengambilan 1
+(3C1 / 11C1) Adalah Perhitungan Untuk Kelereng Merah Pengambilan 2
+(4C1 / 10C1) Adalah Perhitungan Untuk Kelereng Putih Pengambilan 1
+
+2. P(x=1) = 3C1 x (0,6)^1 x (0,4)^2 || P(x=2) = 3C2 x (0,6)^2 x (0,4)^1 || P(x=3) = 3C3 x (0,6)^3 x (0,4)^0
+P(x=1) + P(x=2) + P(x=3) = 0.288 + 0,432 + 0,216 = 0,936
+Asumsi yang digunakan adalah orang yang menjawab jujur menjawab bahwa peristiwa benar terjadi, sehingga untuk
+perhitungannya digunakan rumus distribusi binomial (karena sesuai dengan syarat distribusi binomial) dan 
+dihitung untuk masing - masing kondisi saat 3 orang menjawab jujur sampai dengan minimal 1 orang menjawab jujur
+Jika n = 10, maka hasil P(x=1) + P(x=2) + P(x=3) + ... P(x=10) = 0,999, 
+dengan jumlah kemungkinan 99 persen tentu saja masuk akal jika peristiwa benar terjadi
+Jika n = 100, maka hasil P(x=1) + P(x=2) + P(x=3) + ... P(x=100) = 1,
+dengan jumlah kemungkinan 100 persen tentu saja masuk akal jika peristiwa benar terjadi

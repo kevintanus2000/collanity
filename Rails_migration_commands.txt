@@ -1,0 +1,47 @@
+Scaffolding
+-----------
+rails g scaffold task name:string
+
+DB Migration
+------------
+cd db/migrate
+  more 20220718063918_create_tasks.rb
+  rails db:migrate
+
+rails g migration AddDescriptionToTask  description:text
+
+rails g migration RemoveDescription1FromTask  description1:text
+
+# Dropping a task table
+rails g migration DropTask
+
+Adding, removing, renaming a column
+----------------------------
+rails g migration AddSizeToProduct size:string
+
+class AddKeywordsSizeToProduct < ActiveRecord::Migration
+  def change
+    add_column :products, :keywords, :string
+    add_column :products, :size, :string
+    #rename_column :products, :old_column, :new_column
+    #remove_column :products, :keywords, :string
+  end
+end
+
+Resetting tables (so index start at 1 again)
+----------------
+rails c
+Task.all.delete
+Task.delete_all 
+ActiveRecord::Base.connection.reset_pk_sequence!('tasks')
+
+Rails Console
+-------------
+rails console
+  Task.find_by_id(1)
+  Task.first
+  Task.last
+
+Checking for Rails routes
+-------------------------
+rails routes | grep tasks

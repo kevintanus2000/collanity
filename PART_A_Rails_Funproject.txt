@@ -1,0 +1,55 @@
+To insrall Ruby on Rails on Mac and Linux
+  https://www.ruby-lang.org/en/downloads/
+
+To install Ruby on Rails on Windows
+  https://rubyinstaller.org/
+
+Guide:
+  https://edgeguides.rubyonrails.org/getting_started.html
+
+Create a new project
+- cd projects
+- rails new fun_project
+- cd fun_project
+- Edit Gemfile, comment out these two lines
+  #gem 'spring'
+  #gem 'spring-watcher-listen', '~> 2.0.0'
+- Run: bundle
+- On the browser, type: http://localhost:3000/
+
+Project Description
+-------------------
+Anda diminta untuk membuat app yang menerima UPC atau 'UPC list' sebagai input,
+mengambil informasi (name, brand, catagory, dll) dan gambar, menyimpan di database, 
+dan menampilkan product.
+
+Requirements:
+User bisa menambah product ke database
+User bisa melihat daftar product
+User bisa menghapus product dalam daftar
+Perhatikan kesalahan/situasi yang mungkin terjadi
+
+Bisa memakai http://world.openfoodfacts.org/ untuk mendapatkan informasi tentang product.
+Sebagai contoh, ini beberapa Valid UPC (Search for a Product):
+  3661112054465 - Jambon supérieur - Tradilège - 405 g
+  3564700309575 - Batonnets savoureux boite - Pêche Océan - 500 g 
+  3380330002354 - Château Monplaisir Cuvée Tradition 2012 - Bordeaux - 0,75 l
+
+Ini APInya: http://world.openfoodfacts.org/api/v0/product/<upc_code>.json
+
+Contoh:
+http://world.openfoodfacts.org/api/v0/product/3661112054465.json
+
+{"status":1,"code":"3661112054465","product":{"ingredients_that_may_be_from_palm_oil_n":0,
+"image_front_small_url":
+"https://static.openfoodfacts.org/images/products/366/111/205/4465/front_fr.4.200.jpg",
+"additives_debug_tags":[],"pnns_groups_2":"Processed 
+...
+...
+
+Petunjuk:
+- Bisa memakai 
+  open-uri -> https://ruby-doc.org/stdlib-3.1.2/libdoc/open-uri/rdoc/OpenURI.html
+  dan
+  json -> https://github.com/flori/json
+  untuk mengambil informasi product.

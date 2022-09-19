@@ -1,0 +1,59 @@
+Membuat Skema Database Query
+CREATE TABLE IF NOT EXISTS `books` (
+  `id` int(10) unsigned NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `author` varchar(255) NOT NULL,
+  `year_of_publication` smallint(5) NOT NULL,
+  `book_status` enum('available','borrowed','damaged','lost') NOT NULL,
+  PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `visitors` (
+  `id` int(10) unsigned NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `date_of_birth` date NOT NULL,
+  `gender` enum('male','female') NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `phone_number` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `borrowing_history` (
+  `id` int(10) unsigned NOT NULL,
+  `book_id` int(10) unsigned NOT NULL,
+  `visitor_id` int(10) unsigned NOT NULL,
+  `borrowing_date` date NOT NULL,
+  `return_date` date NOT NULL,
+  PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8;
+
+ALTER TABLE `borrowing_history`
+  ADD KEY `fk_borrowing_book_idx` (`book_id`),
+  ADD CONSTRAINT `fk_borrowing_book` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`),
+  ADD KEY `fk_borrowing_visitor_idx` (`visitor_id`),
+  ADD CONSTRAINT `fk_borrowing_visitor` FOREIGN KEY (`visitor_id`) REFERENCES `visitors` (`id`);
+ 
+INSERT INTO books (id, title, author, year_of_publication, book_status) VALUES (1, 'Classical Mythology', 'Mark P. 0. Morford', 2002, 'available');
+INSERT INTO books (id, title, author, year_of_publication, book_status) VALUES (2, 'Clara Callan', 'Richard Bruce Wright', 2001, 'available');
+INSERT INTO books (id, title, author, year_of_publication, book_status) VALUES (3, 'Decision in Normandy', 'Carlo D\'Este', 1991, 'available');
+INSERT INTO books (id, title, author, year_of_publication, book_status) VALUES (4, 'The Mummies of Urumchi', 'E. J. W. Barber', 1999, 'available');
+INSERT INTO books (id, title, author, year_of_publication, book_status) VALUES (5, 'The Kitchen God\'s Wife', 'Amy Tan', 1991, 'available');
+INSERT INTO visitors (id, name, date_of_birth, gender, address, phone_number) VALUES (1, 'Budi', '1990-01-23', 'male', 'JI. Something No. 51', '08XXXXXXXXXX');
+INSERT INTO visitors (id, name, date_of_birth, gender, address, phone_number) VALUES (2, 'Anto', '1990-01-23', 'male', 'JI. Something No. 51', '08XXXXXXXXXX');
+INSERT INTO visitors (id, name, date_of_birth, gender, address, phone_number) VALUES (3, 'Cindy', '1990-01-23', 'female', 'JI. Something No. 51', '08XXXXXXXXXX');
+INSERT INTO borrowing_history (id, book_id, visitor_id, borrowing_date, return_date) VALUES (1, 1, 2, '2006-01-15', '2006-01-20');
+INSERT INTO borrowing_history (id, book_id, visitor_id, borrowing_date, return_date) VALUES (2, 2, 3, '2006-01-19', '2006-01-21');
+INSERT INTO borrowing_history (id, book_id, visitor_id, borrowing_date, return_date) VALUES (3, 5, 3, '2006-01-23', '2006-01-30');
+INSERT INTO borrowing_history (id, book_id, visitor_id, borrowing_date, return_date) VALUES (4, 5, 2, '2006-02-05', '2006-02-08');
+INSERT INTO borrowing_history (id, book_id, visitor_id, borrowing_date, return_date) VALUES (5, 3, 1, '2006-02-06', '2006-02-10');
+INSERT INTO borrowing_history (id, book_id, visitor_id, borrowing_date, return_date) VALUES (6, 4, 1, '2006-02-11', '2006-03-15');
+INSERT INTO borrowing_history (id, book_id, visitor_id, borrowing_date, return_date) VALUES (7, 3, 2, '2006-02-15', '2006-03-25');
+INSERT INTO borrowing_history (id, book_id, visitor_id, borrowing_date, return_date) VALUES (8, 1, 3, '2006-03-31', '2006-04-25');
+
+Jawaban Part D
+1. select b.title from borrowing_history bh inner join books b on bh.book_id = b.id where bh.borrowing_date >= '2006-01-10' and 
+bh.return_date <= '2006-02-15' and b.year_of_publication = 1991
+
+2. select v.*, DATEDIFF(bh.return_date, bh.borrowing_date) as date_diff from borrowing_history bh inner join visitors v on bh.visitor_id = v.id where DATEDIFF(bh.return_date, bh.borrowing_date) > 30
+
+3. select v.name from borrowing_history bh inner join visitors v on bh.visitor_id = v.id inner join books b on bh.book_id = b.id where b.title = "Classical Mythology"
