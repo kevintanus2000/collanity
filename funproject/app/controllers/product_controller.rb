@@ -22,19 +22,24 @@ class ProductController < ApplicationController
   def create
     if internet_connection("http://world.openfoodfacts.org")
       code = product_params
-      uri = URI.parse("http://world.openfoodfacts.org/api/v0/product/"+ code +".json")
-      str = JSON.parse(uri.read)
-      if str["status"] == 1
-        data = Product.new(name: str["product"]["product_name"], size: str["product"]["quantity"], brands: str["product"]["brands"], categories: str["product"]["categories"], ingredients: str["product"]["ingredients_text"], code: code+".json", image: str["product"]["image_url"])
-        if data.save
-          flash[:message] = "Product Data Successfully Added !!"
-          redirect_to('/product/index')
+      if code !~ /\D/
+        uri = URI.parse("http://world.openfoodfacts.org/api/v0/product/"+ code +".json")
+        str = JSON.parse(uri.read)
+        if str["status"] == 1
+          data = Product.new(name: str["product"]["product_name"], size: str["product"]["quantity"], brands: str["product"]["brands"], categories: str["product"]["categories"], ingredients: str["product"]["ingredients_text"], code: code+".json", image: str["product"]["image_url"])
+          if data.save
+            flash[:message] = "Product Data Successfully Added !!"
+            redirect_to('/product/index')
+          else
+            flash[:error] = "Product Data Failed To Add !!"
+            redirect_to('/product/add')
+          end
         else
-          flash[:error] = "Product Data Failed To Add !!"
+          flash[:error] = "Upc Code Is Not Valid"
           redirect_to('/product/add')
         end
       else
-        flash[:error] = "Upc Code Is Not Valid"
+        flash[:error] = "Upc Code Must Be Positive Numbers"
         redirect_to('/product/add')
       end
     else
