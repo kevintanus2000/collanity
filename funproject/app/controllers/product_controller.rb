@@ -31,19 +31,19 @@ class ProductController < ApplicationController
             redirect_to('/product/index')
           else
             flash[:error] = "Product Data Failed To Add !!"
-            redirect_to('/product/add')
+            redirect_to('/')
           end
         else
           flash[:error] = "Upc Code Is Not Valid"
-          redirect_to('/product/add')
+          redirect_to('/')
         end
       else
         flash[:error] = "Upc Code Must Be Positive Numbers"
-        redirect_to('/product/add')
+        redirect_to('/')
       end
     else
       flash[:error] = "There Is No Internet Connection"
-      redirect_to('/product/add')
+      redirect_to('/')
     end
   end
 
@@ -57,26 +57,26 @@ class ProductController < ApplicationController
     end
   end
 
-  def internet_connection(url)
-    begin
-      true if URI.open(url)
-    rescue
-      false
-    end
-  end
-
-  def handle_parameter_missing(exception)
-    flash[:error] = "Upc Code Must Be Filled"
-    redirect_to('/product/add')
-  end
-
   private
 
+    def internet_connection(url)
+      begin
+        true if URI.open(url)
+      rescue
+        false
+      end
+    end
+
+    def handle_parameter_missing(exception)
+      flash[:error] = "Upc Code Must Be Filled"
+      redirect_to('/')
+    end
+    
     def set_product
-      @data = Product.find_by_code(code_params)
+      @data = Product.find_by_code(code_params + ".json")
       if @data
         flash[:error] = "Product Data With This Upc Code Is Exists"
-        redirect_to('/product/add')
+        redirect_to('/')
       end
     end
 
