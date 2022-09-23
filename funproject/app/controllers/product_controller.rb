@@ -24,7 +24,7 @@ class ProductController < ApplicationController
         uri = URI.parse("http://world.openfoodfacts.org/api/v0/product/"+ code +".json")
         str = JSON.parse(uri.read)
         if str["status"] == 1
-          params = ActionController::Parameters.new(product: { name: str["product"]["product_name"], size: str["product"]["quantity"], brands: str["product"]["brands"], categories: str["product"]["categories"], ingredients: str["product"]["ingredients_text"], code: code, image: str["product"]["image_url"] })
+          params = ActionController::Parameters.new(product: { name: str["product"]["product_name"], size: str["product"]["quantity"], brands: str["product"]["brands"], categories: str["product"]["categories"], ingredients: str["product"]["ingredients_text"], code: code + ".json", image: str["product"]["image_url"] })
           data = Product.new(product_params(params))
           if data.save
             flash[:message] = "Product Data Successfully Added !!"
