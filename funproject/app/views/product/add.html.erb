@@ -1,7 +1,7 @@
 <p>API : http://world.openfoodfacts.org/api/v0/product/upc_code.json</p>
 
 <%= form_tag("/product/create") do %>
-
+    <br>
     <label for="code">Upc Code</label>
     <input type="text" id="code" name="code"> <b class="error"><%= flash[:error] %></b> <br><br>
 
@@ -9,4 +9,5 @@
 
 <% end %>
 <br>
-<h4>Click Here For <a href="/product/index">List Of Product</a></h4>
+<h4>Click Here For <a href="/product/index">List Of Product</a></h4><br>
+<h3><b class="error"><%= flash[:error2] %></b></h3>

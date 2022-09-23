@@ -3,7 +3,7 @@
 <p><b>Size : </b> <%= @data[:size] %></p>
 <p><b>Categories : </b> <%= @data[:categories] %></p>
 <p><b>Ingredients : </b> <%= @data[:ingredients] %></p>
-<p><b>UPC Code : </b> <%= @data[:code] %></p>
+<p><b>UPC Code : </b> <%= @data[:code] + ".json" %></p>
 <img src="<%= @data[:image] %>" alt="Image Address Is Invalid Or Check Your Internet Connection" width="250px" height="250px">
 <br><br>
 <h4>Back To <a href="/product/index">List Of Products</a></h4>
