@@ -30,7 +30,7 @@ class ProductController < ApplicationController
             flash[:message] = "Product Data Successfully Added !!"
             redirect_to('/product/index')
           else
-            flash[:error] = "Product Data Failed To Add !!"
+            flash[:error] = "Product Data Failed To Add, Product " + data.errors.full_messages[0] + " In Json File"
             redirect_to('/')
           end
         else
