@@ -1,0 +1,5 @@
+<tr id="<%= dom_id product %>">
+    <td scope="row"><h5 class><%= product.name %></h5></td>
+    <td><%= button_to 'Show', product, method: :get, class: "btn btn-primary" %></td>
+    <td><%= button_to "Delete", product, method: :delete, class: "btn btn-danger",  form: { data: { turbo_confirm: "Are You Sure To Delete This Product ?" } } %></td>
+</tr>

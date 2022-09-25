@@ -1,0 +1,20 @@
+<h2>List Of Products</h2><b class="message"> <%= notice %></b><b class="error"> <%= flash[:error] %></b>
+<br><br>
+
+<table class="table" id="products">
+    <thead >
+        <tr >
+            <th scope="col" style="border-top-style:none;">Product</th>
+            <th scope="col"style="border-top-style:none;"> </th>
+            <th scope="col" style="border-top-style:none;"> </th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @products.each do |product| %>
+          <%= render product %>
+        <% end %>
+    </tbody>
+</table>
+
+<br>
+<h4>Click Here To <%= link_to "Add New product", new_product_path %></h4>
