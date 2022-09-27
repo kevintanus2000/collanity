@@ -18,7 +18,7 @@ class ProductController < ApplicationController
   end
 
   def create
-    if internet_connection("http://world.openfoodfacts.org")
+    if internet_connection("http://www.google.com")
       code = code_params
       if code !~ /\D/
         uri = URI.parse("http://world.openfoodfacts.org/api/v0/product/"+ code +".json")
